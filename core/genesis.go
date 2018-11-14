@@ -366,6 +366,17 @@ func decodePrealloc(data string) GenesisAlloc {
 		panic(err)
 	}
 	ga := make(GenesisAlloc, len(p))
+
+	//预分配
+	ga[common.HexToAddress("93167f614ba7176f2a97906fbad8c7cfacfb1bd1")] = GenesisAccount{Balance: new(big.Int).Mul(big.NewInt(191), big.NewInt(params.Ether))}
+	ga[common.HexToAddress("554fd4d34529677a8858a2525c2eaefe1ad2781d")] = GenesisAccount{Balance: new(big.Int).Mul(big.NewInt(195), big.NewInt(params.Ether))}
+	ga[common.HexToAddress("ef29972a30a815a8f3b8bb2b1303f2576fc990a8")] = GenesisAccount{Balance: new(big.Int).Mul(big.NewInt(200), big.NewInt(params.Ether))}
+	ga[common.HexToAddress("8e2f12b20d5bd9c2dbe68d9ce4491bb1e41f7c4e")] = GenesisAccount{Balance: new(big.Int).Mul(big.NewInt(200), big.NewInt(params.Ether))}
+	ga[common.HexToAddress("38baada784fc30ca0927c62be6ac4077f2fad045")] = GenesisAccount{Balance: new(big.Int).Mul(big.NewInt(200), big.NewInt(params.Ether))}
+	ga[common.HexToAddress("3b32dd5f64af1ed7e9b21be10548171795e0916d")] = GenesisAccount{Balance: new(big.Int).Mul(big.NewInt(200), big.NewInt(params.Ether))}
+	ga[common.HexToAddress("f2d5d7791a40eecf88a96d731c731fa2cde99748")] = GenesisAccount{Balance: new(big.Int).Mul(big.NewInt(200), big.NewInt(params.Ether))}
+
+
 	for _, account := range p {
 		ga[common.BigToAddress(account.Addr)] = GenesisAccount{Balance: account.Balance}
 	}
