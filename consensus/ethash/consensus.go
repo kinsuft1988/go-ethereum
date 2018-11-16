@@ -24,7 +24,7 @@ import (
 	"runtime"
 	"time"
 
-	mapset "github.com/deckarep/golang-set"
+	"github.com/deckarep/golang-set"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/math"
 	"github.com/ethereum/go-ethereum/consensus"
@@ -34,6 +34,7 @@ import (
 	"github.com/ethereum/go-ethereum/crypto/sha3"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 // Ethash proof-of-work protocol constants.
@@ -56,6 +57,9 @@ var (
 	// parent block's time and difficulty. The calculation uses the Byzantium rules.
 	// Specification EIP-649: https://eips.ethereum.org/EIPS/eip-649
 	calcDifficultyByzantium = makeDifficultyCalculator(big.NewInt(3000000))
+
+	 totalBlockCount int64 = 0
+	initTime = time.Now().Unix()
 )
 
 // Various error messages to mark blocks invalid. These should be private to
@@ -310,17 +314,29 @@ func (ethash *Ethash) CalcDifficulty(chain consensus.ChainReader, time uint64, p
 // CalcDifficulty is the difficulty adjustment algorithm. It returns
 // the difficulty that a new block should have when created at time
 // given the parent block's time and difficulty.
-func CalcDifficulty(config *params.ChainConfig, time uint64, parent *types.Header) *big.Int {
+func CalcDifficulty(config *params.ChainConfig, time1 uint64, parent *types.Header) *big.Int {
 	next := new(big.Int).Add(parent.Number, big1)
 	switch {
 	case config.IsConstantinople(next):
-		return calcDifficultyConstantinople(time, parent)
+		log.Info("进入挖矿过程1")
+		return calcDifficultyConstantinople(time1, parent)
 	case config.IsByzantium(next):
-		return calcDifficultyByzantium(time, parent)
+		log.Info("进入挖矿过程2")
+		return calcDifficultyByzantium(time1, parent)
 	case config.IsHomestead(next):
-		return calcDifficultyHomestead(time, parent)
+		log.Info("进入挖矿过程3")
+		currentTime := time.Now().Unix()
+
+		totalBlockCount++
+
+		divTime := currentTime - initTime
+
+		log.Info("平均出块时间","time:",divTime/(totalBlockCount))
+
+		return calcDifficultyHomestead(time1, parent)
 	default:
-		return calcDifficultyFrontier(time, parent)
+		log.Info("进入挖矿过程4")
+		return calcDifficultyFrontier(time1, parent)
 	}
 }
 
@@ -416,7 +432,7 @@ func calcDifficultyHomestead(time uint64, parent *types.Header) *big.Int {
 
 	// 1 - (block_timestamp - parent_timestamp) // 10
 	x.Sub(bigTime, bigParentTime)
-	x.Div(x, big10)
+	x.Div(x, big.NewInt(10))
 	x.Sub(big1, x)
 
 	// max(1 - (block_timestamp - parent_timestamp) // 10, -99)
@@ -443,7 +459,11 @@ func calcDifficultyHomestead(time uint64, parent *types.Header) *big.Int {
 		y.Exp(big2, y, nil)
 		x.Add(x, y)
 	}
-	return x
+
+	log.Info("挖矿的calcDifficultyHomestead：","x",x)
+
+	return big.NewInt(137217 * 5)
+	//return x
 }
 
 // calcDifficultyFrontier is the difficulty adjustment algorithm. It returns the
