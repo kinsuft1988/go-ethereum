@@ -462,8 +462,8 @@ func calcDifficultyHomestead(time uint64, parent *types.Header) *big.Int {
 
 	log.Info("挖矿的calcDifficultyHomestead：","x",x)
 
-	return big.NewInt(137217 * 5)
-	//return x
+	//return big.NewInt(137217 * 5)
+	return x
 }
 
 // calcDifficultyFrontier is the difficulty adjustment algorithm. It returns the
