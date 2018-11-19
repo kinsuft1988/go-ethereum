@@ -1,0 +1,30 @@
+=============== Nov 16, 2018 (CST) ===============
+10:03:18.483181 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+10:03:18.484651 db@open opening
+10:03:18.502304 version@stat F·[] S·0B[] Sc·[]
+10:03:18.502685 db@janitor F·2 G·0
+10:03:18.502732 db@open done T·18.05191ms
+=============== Nov 16, 2018 (CST) ===============
+10:05:37.680138 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+10:05:37.681744 version@stat F·[] S·0B[] Sc·[]
+10:05:37.681783 db@open opening
+10:05:37.682383 journal@recovery F·1
+10:05:37.687976 journal@recovery recovering @1
+10:05:37.792659 memdb@flush created L0@2 N·21260 S·1MiB "\x00\x00\xae..\x82\x88\x11,v9389":"\xff\xfc\x94..\xa5\x05\xa1,v9518"
+10:05:37.796958 version@stat F·[1] S·1MiB[1MiB] Sc·[0.25]
+10:05:37.798935 db@janitor F·3 G·0
+10:05:37.799279 db@open done T·117.481281ms
+10:07:28.833879 db@close closing
+10:07:28.834378 db@close done T·493.54µs
+=============== Nov 16, 2018 (CST) ===============
+10:22:48.309939 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+10:22:48.311801 version@stat F·[1] S·1MiB[1MiB] Sc·[0.25]
+10:22:48.311828 db@open opening
+10:22:48.311912 journal@recovery F·1
+10:22:48.317527 journal@recovery recovering @3
+10:22:48.318723 memdb@flush created L0@5 N·3 S·483B "Dat..ion,v21263":"eth..ˏ\xa3,v21262"
+10:22:48.324640 version@stat F·[2] S·1MiB[1MiB] Sc·[0.50]
+10:22:48.326174 db@janitor F·4 G·0
+10:22:48.326209 db@open done T·14.372593ms
+10:23:39.465101 db@close closing
+10:23:39.475205 db@close done T·10.099509ms
