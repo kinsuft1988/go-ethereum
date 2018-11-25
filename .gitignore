@@ -27,6 +27,9 @@ build/_vendor/pkg
 /build/bin/
 /geth*.zip
 
+/private/geth
+/private/history
+
 # travis
 profile.tmp
 profile.cov
