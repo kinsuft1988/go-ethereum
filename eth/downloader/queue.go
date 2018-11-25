@@ -731,6 +731,7 @@ func (q *queue) DeliverHeaders(id string, headers []*types.Header, headerProcCh 
 		miss[request.From] = struct{}{}
 
 		q.headerTaskQueue.Push(request.From, -int64(request.From))
+		log.Info("queue error 1")
 		return 0, errors.New("delivery not accepted")
 	}
 	// Clean up a successful fetch and try to deliver any sub-results
