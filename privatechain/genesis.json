@@ -5,7 +5,23 @@
         "eip155Block": 0,
         "eip158Block": 0
     },
-  "alloc"      : {},
+  "alloc"      : {
+    "0x3b32dd5f64af1ed7e9b21be10548171795e0916d": {
+      "balance": "20000000000000000000"
+    },
+    "0x38baada784fc30ca0927c62be6ac4077f2fad045": {
+      "balance": "20000000000000000000"
+    },
+    "0x8e2f12b20d5bd9c2dbe68d9ce4491bb1e41f7c4e": {
+      "balance": "20000000000000000000"
+    },
+    "0xef29972a30a815a8f3b8bb2b1303f2576fc990a8": {
+      "balance": "20000000000000000000"
+    },
+    "0xf2d5d7791a40eecf88a96d731c731fa2cde99748": {
+      "balance": "20000000000000000000"
+    }
+  },
   "coinbase"   : "0x0000000000000000000000000000000000000000",
   "difficulty" : "0x20000",
   "extraData"  : "",
