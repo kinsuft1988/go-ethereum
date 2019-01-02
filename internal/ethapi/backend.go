@@ -69,6 +69,11 @@ type Backend interface {
 
 	ChainConfig() *params.ChainConfig
 	CurrentBlock() *types.Block
+
+
+	// Metric API
+	GetHashrate() float64
+
 }
 
 func GetAPIs(apiBackend Backend) []rpc.API {

@@ -130,9 +130,9 @@ func (self *Miner) Mining() bool {
 	return self.worker.isRunning()
 }
 
-func (self *Miner) HashRate() uint64 {
+func (self *Miner) Hashrate() float64 {
 	if pow, ok := self.engine.(consensus.PoW); ok {
-		return uint64(pow.Hashrate())
+		return pow.Hashrate()
 	}
 	return 0
 }

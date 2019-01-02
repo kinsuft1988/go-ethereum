@@ -34,6 +34,7 @@ import (
 	"github.com/ethereum/go-ethereum/consensus"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
+	"sync/atomic"
 )
 
 const (
@@ -44,6 +45,9 @@ const (
 var (
 	errNoMiningWork      = errors.New("no mining work available yet")
 	errInvalidSealResult = errors.New("invalid or stale proof-of-work solution")
+	hashExcCount         uint64 = 0
+	computePower         uint   = 15
+	startTime            time.Time
 )
 
 // Seal implements consensus.Engine, attempting to find a nonce that satisfies
@@ -66,6 +70,11 @@ func (ethash *Ethash) Seal(chain consensus.ChainReader, block *types.Block, resu
 	}
 	// Create a runner and the multiple search threads it directs
 	abort := make(chan struct{})
+
+	//metric hash rate start time
+	if startTime.IsZero() {
+		startTime = time.Now()
+	}
 
 	ethash.lock.Lock()
 	threads := ethash.threads
@@ -151,14 +160,14 @@ search:
 		case <-abort:
 			// Mining terminated, update stats and abort
 			logger.Trace("Ethash nonce search aborted", "attempts", nonce-seed)
-			ethash.hashrate.Mark(attempts)
 			break search
 
 		default:
 			// We don't have to update hash rate on every nonce, so update after after 2^X nonces
 			attempts++
-			if (attempts % (1 << 15)) == 0 {
-				ethash.hashrate.Mark(attempts)
+			if (attempts % (1 << computePower)) == 0 {
+				atomic.AddUint64(&hashExcCount, 1)
+				ethash.hashrate = computeHashrate(hashExcCount, time.Now())
 				attempts = 0
 			}
 			// Compute the PoW value of this nonce
@@ -368,4 +377,10 @@ func (ethash *Ethash) remote(notify []string, noverify bool) {
 			return
 		}
 	}
+}
+
+func computeHashrate(count uint64, endTime time.Time) float64 {
+	hashrate := math.Pow(float64(2), float64(computePower)) * float64(count) / (endTime.Sub(startTime).Seconds() * 1000)
+	log.Info("blochash", "Hashrate KH/s", hashrate)
+	return hashrate
 }

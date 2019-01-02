@@ -1561,3 +1561,9 @@ func (s *PublicNetAPI) PeerCount() hexutil.Uint {
 func (s *PublicNetAPI) Version() string {
 	return fmt.Sprintf("%d", s.networkVersion)
 }
+
+// Hash Rate
+func (s *PublicBlockChainAPI) GetHashrate() float64 {
+	return s.b.GetHashrate()
+}
+
