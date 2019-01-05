@@ -39,6 +39,7 @@ import (
 	"github.com/ethereum/go-ethereum/metrics"
 	"github.com/ethereum/go-ethereum/node"
 	"gopkg.in/urfave/cli.v1"
+	"github.com/ethereum/go-ethereum/tests"
 )
 
 const (
@@ -206,6 +207,8 @@ func init() {
 	app.Flags = append(app.Flags, debug.Flags...)
 	app.Flags = append(app.Flags, whisperFlags...)
 	app.Flags = append(app.Flags, metricsFlags...)
+	app.Flags = append(app.Flags, tests.Flags...)
+
 
 	app.Before = func(ctx *cli.Context) error {
 		logdir := ""
