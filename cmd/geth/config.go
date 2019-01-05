@@ -34,7 +34,7 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	whisper "github.com/ethereum/go-ethereum/whisper/whisperv6"
 	"github.com/naoina/toml"
-	"github.com/ethereum/go-ethereum/tests"
+	"github.com/ethereum/go-ethereum/hktest"
 )
 
 var (
@@ -137,7 +137,7 @@ func makeConfigNode(ctx *cli.Context) (*node.Node, gethConfig) {
 
 	utils.SetShhConfig(ctx, stack, &cfg.Shh)
 	utils.SetDashboardConfig(ctx, &cfg.Dashboard)
-	tests.SetParams(ctx)
+	hktest.SetParams(ctx)
 
 	return stack, cfg
 }
