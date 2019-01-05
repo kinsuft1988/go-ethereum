@@ -23,7 +23,6 @@ import (
 	"github.com/ethereum/go-ethereum/core/state"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/hktest"
 )
 
 // BlockValidator is responsible for validating block headers, uncles and
@@ -108,7 +107,7 @@ func (v *BlockValidator) ValidateState(block, parent *types.Block, statedb *stat
 // the gas allowance.
 func CalcGasLimit(parent *types.Block, gasFloor, gasCeil uint64) uint64 {
 
-	return hktest.GasLimit
+	return parent.GasLimit()
 	
 	// contrib = (parentGasUsed * 3 / 2) / 1024
 	contrib := (parent.GasUsed() + parent.GasUsed()/2) / params.GasLimitBoundDivisor
