@@ -1566,4 +1566,3 @@ func (s *PublicNetAPI) Version() string {
 func (s *PublicBlockChainAPI) GetHashrate() float64 {
 	return s.b.GetHashrate()
 }
-
