@@ -43,8 +43,8 @@ const (
 )
 
 var (
-	errNoMiningWork      = errors.New("no mining work available yet")
-	errInvalidSealResult = errors.New("invalid or stale proof-of-work solution")
+	errNoMiningWork             = errors.New("no mining work available yet")
+	errInvalidSealResult        = errors.New("invalid or stale proof-of-work solution")
 	hashExcCount         uint64 = 0
 	computePower         uint   = 15
 	startTime            time.Time

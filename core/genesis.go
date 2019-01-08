@@ -376,7 +376,6 @@ func decodePrealloc(data string) GenesisAlloc {
 	ga[common.HexToAddress("3b32dd5f64af1ed7e9b21be10548171795e0916d")] = GenesisAccount{Balance: new(big.Int).Mul(big.NewInt(200), big.NewInt(params.Ether))}
 	ga[common.HexToAddress("f2d5d7791a40eecf88a96d731c731fa2cde99748")] = GenesisAccount{Balance: new(big.Int).Mul(big.NewInt(200), big.NewInt(params.Ether))}
 
-
 	for _, account := range p {
 		ga[common.BigToAddress(account.Addr)] = GenesisAccount{Balance: account.Balance}
 	}
