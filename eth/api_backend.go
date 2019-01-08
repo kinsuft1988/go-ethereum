@@ -227,4 +227,3 @@ func (b *EthAPIBackend) ServiceFilter(ctx context.Context, session *bloombits.Ma
 func (b *EthAPIBackend) GetHashrate() float64 {
 	return b.eth.Miner().Hashrate()
 }
-
