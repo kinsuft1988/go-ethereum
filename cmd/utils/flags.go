@@ -621,7 +621,6 @@ var (
 		Usage: "External EVM configuration (default = built-in interpreter)",
 		Value: "",
 	}
-
 )
 
 // MakeDataDir retrieves the currently requested data directory, terminating
